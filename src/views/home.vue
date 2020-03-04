@@ -61,9 +61,9 @@
                                    <van-divider :style="{'font-size':'.14rem',padding:0,color:'rgb(255, 203, 143)'}">活动规则</van-divider>
                             </div>
                             <div class="c_bottom_details">
-                                <p>新用户邀请5个好友达标，即可领取免费口罩(10只)</p>
-                                <!-- <p>新用户邀请1个好友并且好友升级到16级,即可免费领取口罩(10只)</p> -->
-                                <p>3.2号-3.10号,先到先得,每天限量</p>
+                                <p>1.领取条件：活动期间邀请满5个新徒弟，即可免费领取10片口罩</p>
+                                <p>2.活动时间：3月4日-3月14号，每天限量10万片，先到先得</p>
+                                <p>3.发货时间：活动结束后即3月15号会陆续包邮发货送到您的手上</p>
                             </div>
                     </div>
                 </div>
@@ -106,6 +106,9 @@ export default {
     },
     mounted(){
         this.scrollInit('.home',this)
+        this.init()
+    },
+    activated(){
         this.init()
     },
     methods:{
@@ -219,7 +222,7 @@ export default {
 
         .content
             width 3.45rem 
-            height 2.52rem
+            height 3.1rem
             margin auto
             box-shadow: 0 2Px 4Px 0 rgba(0,0,0,0.10);
             border-radius: 8px;
@@ -274,7 +277,7 @@ export default {
                             height .54rem
             .c_bottom
                 width 100%
-                height 1.42rem
+                height 2rem
                 padding-top .1rem
                 background: #A62353;
                 text-align center
@@ -287,7 +290,7 @@ export default {
                     font-size  .14rem
                     text-align start
                     padding 0 .15rem
-                    line-height .2rem
+                    line-height .21rem
                     color rgb(236,167,129)
 
 </style>

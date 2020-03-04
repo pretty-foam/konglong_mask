@@ -3,7 +3,7 @@ import { Toast } from 'vant';
 import qs from 'qs'
 
 // Axios.defaults.baseURL='http://192.168.199.193:8888'
-Axios.defaults.baseURL='http://47.114.91.139:9501'
+Axios.defaults.baseURL='http://apiv2.higaoyao.com:9527'
 // Axios.defaults.baseURL='http://192.168.177.111:7000'
 
 

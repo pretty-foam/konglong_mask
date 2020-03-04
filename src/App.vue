@@ -7,7 +7,6 @@
     </div>
 </template>
 <script>
-import vconsole from 'vconsole'
 
 export default {
     data(){
@@ -15,7 +14,6 @@ export default {
     components:{
     },
     mounted(){
-        new vconsole()
     },
     methods:{
 
