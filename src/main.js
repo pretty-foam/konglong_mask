@@ -26,10 +26,12 @@ Vue.prototype.scrollInit =(el,that)=>{
 }
 
 //获取客户端token
-let token =null //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMyMjUzNjAsImV4cCI6MTU4NTgxNzM2MCwibmJmIjoxNTgzMjI1MzYwLCJ1aWQiOiIxIn0.a9mxaPOHNHWctp8J3T8-rwrendRfTkS5YJRCmxis3gY' 
+let token =null//'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMyMjUzNjAsImV4cCI6MTU4NTgxNzM2MCwibmJmIjoxNTgzMjI1MzYwLCJ1aWQiOiIxIn0.a9mxaPOHNHWctp8J3T8-rwrendRfTkS5YJRCmxis3gY' 
 window.getAsyncToken=data=>token = data
 Vue.prototype.getUserID=()=>{
-  !token ? window.UserHandler.postMessage(JSON.stringify({type:2, callback:"getAsyncToken"})):null  //app获取token
+  if(!token && window.UserHandler){
+      window.UserHandler.postMessage(JSON.stringify({type:2, callback:"getAsyncToken"}))  //app获取token
+  }
   return token 
 }
 new Vue({

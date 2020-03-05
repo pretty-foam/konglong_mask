@@ -54,7 +54,7 @@ export default {
                isAdd:1,        
            })
            this.$toast('提交成功!')
-           this.$router.push('/home')
+           this.$router.go('-1')
         }
     }
 }

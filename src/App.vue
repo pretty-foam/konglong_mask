@@ -9,14 +9,11 @@
 <script>
 
 export default {
-    data(){
-    },
     components:{
     },
     mounted(){
     },
     methods:{
-
     },
 }
 </script>

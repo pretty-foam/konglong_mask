@@ -3,10 +3,19 @@
            <div class="honewContainer">
                 <img src="../assert/img/h5_bg.png" alt="" class="pic">
                 <div class='inviteState' @click="isJump(info.state)">
-                    <img  :src="img[info.state]" alt="" >
+                        {{inviteState[info.state]}}
                 </div>
                 <div class='content'>
                     <div class="c_top">
+                        <div class="describe">
+                            新老用户邀请5个好友达标，即可领取免费口罩（10只）
+                        </div>
+                        <div class="c_top_title ">
+                                   <van-divider :style="{'font-size':'.14rem',padding:0,color:'rgb(255, 203, 143)'}">
+                                       <span v-if="info.state==0||info.state==1">邀请列表</span>
+                                       <span v-else>奖品列表</span>
+                                   </van-divider>
+                        </div>
                         <!--未领取奖励显示-->
                         <div class="c_top_state" v-if ='info.state==0||info.state==1'>
                                 <div class="cell" v-for="(key,index) of info.picHead" :key="index">
@@ -20,54 +29,61 @@
                                 </div>
                                 <div class='logistics_right' v-if="info.logistics.state==1">
                                         <div class="logistics_right_state">
-                                            口罩(10只)待发货
+                                            口罩(10只) <span class="logistics_suspe">待发货</span>
                                         </div>
                                         <div class="logistics_right_number">
                                             正在等待快递公司揽货
                                         </div>
                                         <!--悬浮发货状态-->
-                                        <div class="logistics_suspe">
+                                        <!-- <div class="logistics_suspe">
                                                 待发货
-                                        </div>
+                                        </div> -->
                                 </div>
                                  <div class='logistics_right' v-if='info.logistics.state==2'>
                                         <div class="logistics_right_state">
-                                            口罩(10只)已发货
+                                            口罩(10只) <span class="logistics_suspe">已发货</span>
                                         </div>
                                         <div class="logistics_right_number">
                                             订单号：({{info.logistics.company}}){{info.logistics.number}}
                                         </div>
                                          <!--悬浮发货状态-->
-                                        <div class="logistics_suspe">
+                                        <!-- <div class="logistics_suspe">
                                                 已发货
-                                        </div>
+                                        </div> -->
                                 </div>
-                                 <div class='logistics_right' v-if='info.logistics.state==4'>
+                                 <div class='logistics_right' v-if='info.logistics.state!=2||info.logistics.state!=1'>
                                         <div class="logistics_right_state">
-                                            口罩(10只)已签收
+                                            口罩(10只) <span class="logistics_suspe">{{logistics_status[info.logistics.state]}}</span>
                                         </div>
                                         <div class="logistics_right_number">
                                             订单号：({{info.logistics.company}}){{info.logistics.number}}
                                         </div>
                                          <!--悬浮发货状态-->
-                                        <div class="logistics_suspe">
+                                        <!-- <div class="logistics_suspe">
                                                 已签收
-                                        </div>
+                                        </div> -->
                                 </div>
                          </div>
                     </div>
+                    <!--活动说明-->
                     <div class="c_bottom">
                             <div class="c_bottom_title">
                                    <van-divider :style="{'font-size':'.14rem',padding:0,color:'rgb(255, 203, 143)'}">活动规则</van-divider>
                             </div>
                             <div class="c_bottom_details">
-                                <p>1.领取条件：活动期间邀请满5个新徒弟，即可免费领取10片口罩</p>
-                                <p>2.活动时间：3月4日-3月14号，每天限量10万片，先到先得</p>
-                                <p>3.发货时间：活动结束后即3月15号会陆续包邮发货送到您的手上</p>
+                                <p>加油，武汉！加油，中国！恐龙有钱团队积极响应国家号召！每天为大家免费送10万只口罩！限量领取！尽量少出门，勤洗手！在家玩恐龙有钱，玩游戏还能赚点零钱！恐龙有钱将与您一起打赢疫情防控狙击战！ </p>
+                                <p></p>
+                                <p>活动规则：</p>
+                                <p>新老用户皆可参与</p>
+                                <p>新老用户邀请5个好友达标，即可领取免费口罩（10只）。</p>
+                                <p></p>
+                                <p>活动周期：</p>
+                                <p>3.4号-3.10号，先到先得，每天限量！</p>
                             </div>
                     </div>
                 </div>
            </div>
+           <!--分享弹窗-->
             <van-popup v-model="showShareArea" position="bottom" class="shadow_share" @click=offShare>
                 <div class="share_area">
                     <div class="share_buttons" @click.stop=''>
@@ -91,17 +107,27 @@ import {getInviteUserList,getUserGoods,getReward}  from '../config/api'
 export default {
     data(){
         return{
-            showShareArea: false,
+            showShareArea: false,  //是否显示分享弹窗
             info:{
                 state:null, //奖励状态 0邀请状态 1领取状态 2发放中 3 领取成功
                 logistics:{
                     state:0,  // 0 待发货 1 发货中 4签收 
-                    number:'12312332112',
+                    number:'',
                     company:'',
                 },//物流信息
-                picHead:['','','','',''],  //
+                picHead:['','','','',''],  //邀请用户头像
             },
-            img:['./img/btn_立即邀请.png','./img/btn_马上领取.png','./img/btn_励发放中.png','./img/btn_领取成功.png'],
+            inviteState:['立即邀请','马上领取','奖励发放中','领取成功'],//领取状态
+            logistics_status:[
+                '查询出错',
+                '待发货',
+                '已发货',
+                '派送中',
+                '已签收',
+                '拒收',
+                '疑难件',
+                '退回'
+            ],//物流状态
         }
     },
     mounted(){
@@ -205,47 +231,58 @@ export default {
         background rgb(255,32,65)
         padding-bottom .5rem
         .pic
-            height 5.28rem
+            height 5.6rem
         .inviteState
             position absolute
-            top 4.32rem
+            top 4.12rem
             left 0
             right 0
             margin auto
-            width 3rem
+            width 3.2rem
             height .6rem
             display flex 
             justify-content center 
             align-items center
+            background url('../assert/img/btn.png') no-repeat 
+            background-size contain
+            font-size .16rem
+            font-weight 600 
+            color: #A62353
+            z-index 2
             & >img 
                 height .19rem
-
         .content
             width 3.45rem 
-            height 3.1rem
-            margin auto
+            margin -1.1rem auto 0 auto 
             box-shadow: 0 2Px 4Px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-            border-radius: 8px;
-            overflow hidden
+            font-size .12rem 
+            color rgb(236,167,129)
             .c_top
-                height .6rem
+                height 1.71rem
                 padding .2rem .05rem
                 background #a62353d4
                 position relative
+                text-align center
+                border-radius: 8px;
+                .c_top_title 
+                    color #FFCB8F 
+                    font-size .14rem
+                    display inline-block
+                    width 1.6rem
+                    margin-top .2rem
+                .describe
+                    margin .1rem .1rem 0 .1rem
+                    text-align center
                 .logistics_suspe
                     background #FFE765 
+                    display inline-block
                     width .6rem
                     height .21rem
-                    border-bottom-left-radius .21rem
-                    border-top-left-radius .21rem
+                    border-radius .21rem
                     text-align center
                     line-height .21rem
                     color #B4214D 
                     font-size .12rem
-                    position absolute
-                    top .15rem
-                    right  0
                 .logistics
                     padding 0 .1rem
                     display flex
@@ -262,6 +299,7 @@ export default {
                         margin-left .15rem
                         color  rgb(255, 203, 143)
                         font-size .14rem
+                        text-align start
                 .c_top_state
                     display flex
                     justify-content space-around
@@ -276,21 +314,24 @@ export default {
                             width .54rem
                             height .54rem
             .c_bottom
+                margin-top .15rem
                 width 100%
-                height 2rem
-                padding-top .1rem
-                background: #A62353;
+                height 2.6rem
+                background: #A62353d4
                 text-align center
+                border-radius: 8px;
                 .c_bottom_title
                     color #FFCB8F 
                     font-size .14rem
                     display inline-block
                     width 1.6rem
                 .c_bottom_details
-                    font-size  .14rem
+                    font-size  .12rem
                     text-align start
                     padding 0 .15rem
-                    line-height .21rem
+                    line-height .18rem
                     color rgb(236,167,129)
+                    & >p 
+                        min-height .16rem
 
 </style>
