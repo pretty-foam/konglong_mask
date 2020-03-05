@@ -26,7 +26,7 @@ Vue.prototype.scrollInit =(el,that)=>{
 }
 
 //获取客户端token
-let token =null//'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMyMjUzNjAsImV4cCI6MTU4NTgxNzM2MCwibmJmIjoxNTgzMjI1MzYwLCJ1aWQiOiIxIn0.a9mxaPOHNHWctp8J3T8-rwrendRfTkS5YJRCmxis3gY' 
+let token =null //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYiLCJpYXQiOjE1ODMyMjUzNjAsImV4cCI6MTU4NTgxNzM2MCwibmJmIjoxNTgzMjI1MzYwLCJ1aWQiOiIxIn0.a9mxaPOHNHWctp8J3T8-rwrendRfTkS5YJRCmxis3gY' 
 window.getAsyncToken=data=>token = data
 Vue.prototype.getUserID=()=>{
   if(!token && window.UserHandler){

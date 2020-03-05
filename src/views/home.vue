@@ -51,7 +51,7 @@
                                                 已发货
                                         </div> -->
                                 </div>
-                                 <div class='logistics_right' v-if='info.logistics.state!=2||info.logistics.state!=1'>
+                                 <div class='logistics_right' v-if='info.logistics.state==4'>
                                         <div class="logistics_right_state">
                                             口罩(10只) <span class="logistics_suspe">{{logistics_status[info.logistics.state]}}</span>
                                         </div>
@@ -71,14 +71,9 @@
                                    <van-divider :style="{'font-size':'.14rem',padding:0,color:'rgb(255, 203, 143)'}">活动规则</van-divider>
                             </div>
                             <div class="c_bottom_details">
-                                <p>加油，武汉！加油，中国！恐龙有钱团队积极响应国家号召！每天为大家免费送10万只口罩！限量领取！尽量少出门，勤洗手！在家玩恐龙有钱，玩游戏还能赚点零钱！恐龙有钱将与您一起打赢疫情防控狙击战！ </p>
-                                <p></p>
-                                <p>活动规则：</p>
-                                <p>新老用户皆可参与</p>
-                                <p>新老用户邀请5个好友达标，即可领取免费口罩（10只）。</p>
-                                <p></p>
-                                <p>活动周期：</p>
-                                <p>3.4号-3.10号，先到先得，每天限量！</p>
+                                <p>领取条件：活动期间邀请5个新用户，即可免费领取10副口罩 </p>
+                                <p>活动时间：3月4日-3月14号，每天限量10万副，先到先得</p>
+                                <p>发货时间：活动结束后即3月15号会陆续包邮发货送到您的手上</p>
                             </div>
                     </div>
                 </div>
@@ -111,7 +106,7 @@ export default {
             info:{
                 state:null, //奖励状态 0邀请状态 1领取状态 2发放中 3 领取成功
                 logistics:{
-                    state:0,  // 0 待发货 1 发货中 4签收 
+                    state:null,  // 0 待发货 1 发货中 4签收 
                     number:'',
                     company:'',
                 },//物流信息
@@ -316,7 +311,7 @@ export default {
             .c_bottom
                 margin-top .15rem
                 width 100%
-                height 2.6rem
+                height 2.1rem
                 background: #A62353d4
                 text-align center
                 border-radius: 8px;
@@ -326,12 +321,12 @@ export default {
                     display inline-block
                     width 1.6rem
                 .c_bottom_details
-                    font-size  .12rem
+                    font-size  .14rem
                     text-align start
                     padding 0 .15rem
-                    line-height .18rem
+                    line-height .22rem
                     color rgb(236,167,129)
                     & >p 
-                        min-height .16rem
+                       margin .05rem 0
 
 </style>
