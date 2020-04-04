@@ -17,10 +17,5 @@ export default {
     },
 }
 </script>
-<style lang="stylus" >
-.app 
-    font-size .16rem
-    font-family PingFangSC-Regular
-    width 100vw
-    height 100vh
+<style lang="stylus">
 </style>

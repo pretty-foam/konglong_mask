@@ -117,9 +117,9 @@ html, body {
  .bookContent p{
      padding: .08rem 0 ;
  }
- .van-overlay{
+ /* .van-overlay{
      background: transparent !important;
- }
+ } */
  .app >  .van-overlay{
     background: rgba(0, 0, 0, .7) !important;
 }
@@ -139,3 +139,33 @@ html, body {
  .van-divider::after, .van-divider::before{
     border-color:rgba(255, 203, 143,.6)
  }
+
+ .van-field--error .van-field__control, .van-field--error .van-field__control::placeholder{
+     color: #7e8c8d;
+ }
+ .el-table__body-wrapper{
+     max-height: 480Px;
+     overflow-y: auto !important;
+ }
+ .el-table__body-wrapper::-webkit-scrollbar{
+     width: 10Px;
+     height: 10Px;
+     background-color: white;
+ }
+
+ ::-webkit-scrollbar-track-piece{
+     background: transparent;
+ }
+ .is-leaf{
+     background: #f5f7fa !important;
+     color: #909399;
+ }
+
+ .el-table{
+    border: 1Px solid rgba(0, 0, 0, .08);
+ }
+
+ .van-calendar__body::-webkit-scrollbar{
+     width: 6px !important;
+ }
+

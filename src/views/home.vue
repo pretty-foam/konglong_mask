@@ -157,6 +157,7 @@ export default {
                 this.$router.push('/editAdress')
             //  分享状态
             }else if(state==0){
+                await getReward({token:this.getUserID()})
                 this.showShareArea = true
             }
         },

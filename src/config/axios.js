@@ -9,8 +9,8 @@ Axios.defaults.baseURL='http://apiv2.higaoyao.com:9527'  //'http://47.114.91.139
 
 Axios.interceptors.response.use(
     res=>{
-       if(res.data['code']!=200&&res.data['code']!=600){
-            let errMsg = res.data['msg']||'系统错误'
+       if(res.data['status']=='fail'){
+            let errMsg = res.data.data['errMsg']||'系统错误'
             Toast(errMsg)
             throw new Error(errMsg)
        }

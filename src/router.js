@@ -1,19 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const home = ()=>import('./views/home')  //书城首页
-const editAdress = ()=>import('./views/editAdress')  //编辑地址
+const problem_sub = ()=>import('./views/problem/Submission.vue')  //编辑地址
+const problem_table = ()=>import('./views/problem/table.vue')  //编辑地址
 
 
 Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
-  // base:'/',
+  mode: 'history',
+  base:'/',
   routes: [
-    {path:"/",redirect:'/home'},
-    {path:"/home",component:home,name:'home',meta:{title:'每天免费送10万只口罩'}},
-    {path:"/editAdress",component:editAdress,name:'editAdress',meta:{title:'填写收货地址'}},
+    {path:"/problem",component:problem_sub,name:'problem_sub',meta:{title:'恐龙有钱-用户反馈'}},
+    {path:"/problem_table",component:problem_table,name:'problem_table',meta:{title:'恐龙有钱-用户反馈表格'}},
   ],
   scrollBehavior () {
     // return 期望滚动到哪个的位置
