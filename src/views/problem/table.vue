@@ -11,8 +11,16 @@
                 :value=val.value>
                 </el-option>
               </el-select>
+              <el-select v-model="input.cStatus" placeholder="请选择状态"  class="input">
+                <el-option
+                v-for="val in statusList"
+                :key=val.value
+                :label=val.label
+                :value=val.value>
+                </el-option>
+              </el-select>
               <el-input v-model="input.inviteCode" placeholder="请输入邀请码" class="input"></el-input>
-            <el-button  type='primary' class="btn" @click="getList">查询</el-button>
+            <el-button  type='primary' class="btn" @click="getList({page:1})">查询</el-button>
       </div>
       <el-table
       :data="tableData"
@@ -22,9 +30,9 @@
           :key =key 
           :prop=val.value
           :label=val.label
-          align="center"
+           align="center"
           :show-overflow-tooltip=val.tips
-          min-width="200"
+          :min-width=val.width
           >
         </el-table-column>
       </el-table>
@@ -33,6 +41,7 @@
         v-if="total>listQuery.limit"
         class="page"
         :total="total"
+        style="margin-bottom:120Px"
         :page.sync="listQuery.page"
         :limit.sync="listQuery.limit"
         @pagination="getList" />
@@ -52,7 +61,7 @@ export default {
               {
                 label:"邀请码",
                 value:"inviteCode",
-                width:150,
+                width:80,
               },
                {
                 label:"类型",
@@ -62,7 +71,11 @@ export default {
                {
                 label:"申请时间",
                 value:"createTime",
-                width:200
+                width:100
+              },
+               {
+                label:"处理状态",
+                value:"status",
               },
                {
                 label:"提现金额",
@@ -72,17 +85,17 @@ export default {
                {
                 label:"提现日期",
                 value:"exDate",
-                width:150
+                width:100
               },
                {
                 label:"刷子邀请码",
                 value:"brushCode",
-                width:150
+                width:100
               },
               {
                 label:"徒弟邀请码",
                 value:"discipleCode",
-                width:150
+                width:100
               },
               {
                 label:"关联徒弟时间",
@@ -92,7 +105,12 @@ export default {
               {
                 label:"备注",
                 value:"remark",
-                 width:250
+                 width:200
+              },
+              {
+                label:"处理结果",
+                value:"result",
+                 width:200
               },
             ],
             listQuery:{
@@ -131,31 +149,48 @@ export default {
               },
             ],
             input:{
-              type:0
+              type:0,
+              cStatus:0,
             },
+            statusList:[
+              {
+                label:"全部",
+                value:0,
+              },
+              {
+                label:'未处理',
+                value:1,
+              },
+              {
+                label:'已处理',
+                value:2
+              },
+            ],
         }
     },
     components:{
       pagination
     },
     methods:{
-      /**分页获取数据 */
-        async getList(){
+      /**分页获取数据
+       * @param {any}  info  分页信息 
+       */
+        async getList(info){
+          this.listQuery.page = info?info.page:this.listQuery.page
           if(!this.input.inviteCode){delete this.input.inviteCode}
           const {data} = await prob_table({
-               browserId:this.userId,
+               browserId:this.userId||0,
                page:this.listQuery.page-1,
                sysType:"klyq",
-               ...this.input
+               ...this.input,
            })
            this.total = data.total 
            this.tableData = data.result 
            this.tableData.forEach(val=>{
-             console.log(val.type)
                  val.typeVal =this.columns.filter(el=>el.value==val.type)[0].label
+                 val.status = val.status?"已处理":"未处理"
            })
         },
-
         /**获取游览器指纹 */
         getBrowserId(){
           fingerprint2.get({canvas:true},data=>{
@@ -175,10 +210,11 @@ export default {
 
 <style lang="stylus" scoped>
 .table 
-  padding 50Px
+  padding 20Px
   background rgba(0,0,0,.05)
   height 100vh
   font-size 14Px
+  overflow auto
   .choose
    height 40Px
    display flex

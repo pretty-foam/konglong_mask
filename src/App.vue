@@ -18,4 +18,8 @@ export default {
 }
 </script>
 <style lang="stylus">
+.app 
+    width 100vw
+    height 100vh 
+    background   #f7f8fa
 </style>

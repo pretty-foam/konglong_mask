@@ -13,8 +13,10 @@ export const editAddress = data =>Axios({method:'post',url:'/api/v1/user/address
 export const getUserGoods = data =>Axios({method:'post',url:'/api/v1/user/getUserGoodsInfo',data})
 
 /**提交反馈 */
-export const prob_submit = data => Axios({method:"get",url:'http://xcx.suohabb.com:8891/feedback/addFeedback',data}) 
+export const prob_submit = data => Axios({method:"get",url:'http://xcx.suohabb.com:8011/feedback/addFeedback',data}) 
 
 /**获取问题表格 */
-export const prob_table = data => Axios({method:"get",url:'http://xcx.suohabb.com:8891/feedback/feedbackList',data}) 
+export const prob_table = data => Axios({method:"get",url:'http://xcx.suohabb.com:8011/feedback/feedbackList',data}) 
 
+/**用户查询反馈结果 */
+export const prob_feedback = data => Axios({method:"get",url:'http://xcx.suohabb.com:8011/feedback/feedback',data}) 

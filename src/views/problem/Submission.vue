@@ -2,86 +2,107 @@
     <!--问题提交页面-->
     <div class="Sub" ref="Sub">
         <div class="Sub_container">
-            <div class="title">用户反馈</div>
-            <van-form @submit="onSubmit">
-                <van-field
-                readonly
-                clickable
-                name="type"
-                :value="form.type"
-                label="问题类型"
-                placeholder="点击选择问题类型"
-                @click="showPicker_type = true"
-                :rules="[{ required: true, message: '请选择问题' }]"
-                />
-                <van-field
-                    v-model="form.code"
-                    name="inviteCode"
-                    label="邀请码"
-                    placeholder="请填写本人邀请码"
-                    :rules="[{ required: true,validator:val=>val.length<20, message: '请填写正确的邀请码' }]"
-                />
-                 <van-field
-                    v-model="form.brushCode"
-                    v-if="form.typeVal ==2"
-                    name="brushCode"
-                    label="刷子邀请码"
-                    placeholder="请填写邀请码"
-                    :rules="[{ required: true, message: '请填写邀请码' }]"
-                />
-                 <van-field
+          <van-nav-bar
+            title="用户反馈"
+          />
+          <van-tabs v-model="active">
+            <van-tab title="提交反馈">
+                <van-form @submit="onSubmit">
+                    <van-field
+                    readonly
+                    clickable
+                    name="type"
+                    :value="form.type"
+                    label="问题类型"
+                    placeholder="点击选择问题类型"
+                    @click="showPicker_type = true"
+                    :rules="[{ required: true, message: '请选择问题' }]"
+                    />
+                    <van-field
+                        v-model="form.code"
+                        name="inviteCode"
+                        label="邀请码"
+                        placeholder="请填写本人邀请码"
+                        :rules="[{ required: true,validator:val=>val.length<20, message: '请填写正确的邀请码' }]"
+                    />
+                    <van-field
+                        v-model="form.brushCode"
+                        v-if="form.typeVal ==2"
+                        name="brushCode"
+                        label="刷子邀请码"
+                        placeholder="请填写邀请码"
+                        :rules="[{ required: true, message: '请填写邀请码' }]"
+                    />
+                    <van-field
+                        v-if="form.typeVal ==3"
+                        v-model="form.childCode"
+                        name="brushCode"
+                        label="徒弟邀请码"
+                        placeholder="请填写邀请码"
+                        :rules="[{ required: true, message: '请填写邀请码' }]"
+                    />
+                    <van-field
+                        v-if="form.typeVal ==0"
+                        v-model="form.money"
+                        name="exMoney"
+                        type='number'
+                        label="提现金额"
+                        placeholder="金额"
+                        :rules="[{ required: true, message: '请输入提现金额' }]"
+                    />
+                    <van-field
+                    readonly
+                    clickable
+                    name="relationDate"
+                    :value="form.childTime"
                     v-if="form.typeVal ==3"
-                    v-model="form.childCode"
-                    name="brushCode"
-                    label="徒弟邀请码"
-                    placeholder="请填写邀请码"
-                    :rules="[{ required: true, message: '请填写邀请码' }]"
-                />
-                <van-field
+                    label="关联日期"
+                    placeholder="点击选择日期"
+                    @click="showPicker_time = true"
+                    />
+                    <van-field
                     v-if="form.typeVal ==0"
-                    v-model="form.money"
-                    name="exMoney"
-                    type='number'
-                    label="提现金额"
-                    placeholder="金额"
-                    :rules="[{ required: true, message: '请输入提现金额' }]"
-                />
-                 <van-field
-                readonly
-                clickable
-                name="relationDate"
-                :value="form.childTime"
-                v-if="form.typeVal ==3"
-                label="关联日期"
-                placeholder="点击选择日期"
-                @click="showPicker_time = true"
-                />
-                <van-field
-                v-if="form.typeVal ==0"
-                readonly
-                clickable
-                name="exDate"
-                :value="form.time"
-                label="提现日期"
-                placeholder="点击选择日期"
-                @click="showPicker_time = true"
-                />
-                <van-field
-                    autosize
-                    show-word-limit
-                    type="textarea"
-                    v-model="form.remarks"
-                    name="remark"
-                    label="备注"
-                    maxlength="300"
-                    placeholder="备注信息"
-                />
-                <div style="margin: 16px;">
-                    <van-button round block type="info" native-type="submit">
-                    提交反馈
-                    </van-button>
-                </div>
-            </van-form>
+                    readonly
+                    clickable
+                    name="exDate"
+                    :value="form.time"
+                    label="提现日期"
+                    placeholder="点击选择日期"
+                    @click="showPicker_time = true"
+                    />
+                    <van-field
+                        autosize
+                        show-word-limit
+                        type="textarea"
+                        v-model="form.remarks"
+                        name="remark"
+                        label="备注"
+                        maxlength="300"
+                        placeholder="备注信息"
+                    />
+                    <div style="margin: 16px;">
+                        <van-button round block type="info" native-type="submit">
+                        提交反馈
+                        </van-button>
+                    </div>
+                </van-form>
+            </van-tab>
+            <van-tab title="查询反馈">
+                    <van-field
+                        v-model="form.code"
+                        name="inviteCode"
+                        label="邀请码"
+                        placeholder="请填写本人邀请码"
+                        :rules="[{ required: true,validator:val=>val.length<20, message: '请填写正确的邀请码' }]"
+                    />
+                    <div style="margin: 16px;">
+                        <van-button round block type="info"  @click="toQuery">
+                            查询反馈
+                        </van-button>
+                    </div>
+            </van-tab>
+          </van-tabs>
+            
             <div class="copyright">
                 Copyright © 2020 上海易慕网络科技有限公司
             </div>
@@ -127,7 +148,8 @@ export default {
       showPicker_time:false,// 日历弹窗
       minDate:new Date(2019,12,1),
       maxDate:new Date(),
-      defaultDate:new Date()
+      defaultDate:new Date(),
+      active:0,
     };
   },
   methods: {
@@ -156,6 +178,18 @@ export default {
     initHeight(){
       const h = window.document.body.offsetHeight
       this.$refs.Sub.style=`height:${h}px`
+    },
+    /**跳转查询 */
+    toQuery(){
+        if(!this.form.code){
+          return this.$toast('请填写邀请码')
+        }
+        this.$router.push({
+          path:"/problem_query",
+          query:{
+            id:this.form.code
+          }
+        })
     }
   },
   mounted(){
@@ -170,18 +204,11 @@ export default {
    width 100vw
    height 100vh
    overflow hidden
-   background #f7f8fa
    .Sub_container
         background #f7f8fa
         width 100vw
         height 100%
         position relative
-        .title 
-            font-size .16rem
-            text-align center
-            padding .2rem 0
-            color rgba(0,0,0,.8)
-            font-weight 600
         .copyright
             font-size .12rem
             color rgba(0,0,0,.6)

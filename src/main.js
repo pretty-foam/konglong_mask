@@ -4,7 +4,7 @@ import router from './router'
 import 'vant/lib/index.css';
 import './assert/css/reset.css'
 import Scroll from 'better-scroll'
-import {Field,Divider,Form,Button,Popup,RadioGroup, Radio,Picker,Calendar} from 'vant'
+import {Field,Divider,Form,Button,Popup,RadioGroup, Radio,Picker,Calendar,Tabs,Tab,NavBar} from 'vant'
 import el from 'element-ui'
 Vue.use(Divider)
 Vue.use(Field)
@@ -23,6 +23,9 @@ Vue.use(el.Pagination)
 Vue.use(el.Button)
 Vue.use(el.Option)
 Vue.use(el.Input)
+Vue.use(Tabs)
+Vue.use(Tab)
+Vue.use(NavBar)
 
 Vue.config.productionTip = false
 //滚动初始化
